@@ -2,4 +2,6 @@
 
 {% block package_basic_fields_custom %}
   {{ form.input('custom_text', label=_('Custom Text'), id='field-custom_text', placeholder=_('custom text'), value=data.custom_text, error=errors.custom_text, classes=['control-medium']) }}
+  {{ form.input('other_affiliates', label=_('Other affiliates'), id='field-other_affiliates', placeholder=_('Other affiliates'), value=data.other_affiliates, error=errors.other_affiliates, classes=['control-medium']) }}
+  {{ form.input('asset_type', label=_('Asset type'), id='field-asset_type', placeholder=_('Asset type'), value=data.asset_type, error=errors.asset_type, classes=['control-medium']) }}
 {% endblock %}
