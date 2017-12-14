@@ -24,11 +24,11 @@ setup(
     url='https://github.com/CSIRO-enviro-informatics/ckanext-digitalassetfields',
 
     # Author details
-    author='''''',
+    author='''CSIRO Land and Water Environmental Informatics''',
     author_email='''oznome-lw@csiro.au''',
 
     # Choose your license
-    license='AGPL',
+    license='MIT',
 
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
