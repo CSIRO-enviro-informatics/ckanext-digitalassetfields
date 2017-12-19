@@ -9,28 +9,60 @@ class DigitalassetfieldsPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
    p.implements(p.IConfigurer)
 
 
-   def create_package_schema(self):
-        # let's grab the default schema in our plugin
-        schema = super(DigitalassetfieldsPlugin, self).create_package_schema()
-        # our custom field
+   def _modify_package_schema(self, schema):
         schema.update({
             'custom_text': [tk.get_validator('ignore_missing'),
+                            tk.get_converter('convert_to_extras')],
+            'asset_type': [tk.get_validator('ignore_missing'),
+                            tk.get_converter('convert_to_extras')],
+            'related_projects': [tk.get_validator('ignore_missing'),
+                            tk.get_converter('convert_to_extras')],
+            'related_publications': [tk.get_validator('ignore_missing'),
+                            tk.get_converter('convert_to_extras')],
+            'asset_owner': [tk.get_validator('ignore_missing'),
+                            tk.get_converter('convert_to_extras')],
+            'asset_status': [tk.get_validator('ignore_missing'),
+                            tk.get_converter('convert_to_extras')],
+            'expl_notes': [tk.get_validator('ignore_missing'),
+                            tk.get_converter('convert_to_extras')],
+            'description': [tk.get_validator('ignore_missing'),
+                            tk.get_converter('convert_to_extras')],
+            'other_affiliates': [tk.get_validator('ignore_missing'),
                             tk.get_converter('convert_to_extras')]
         })
         return schema
+
+   def create_package_schema(self):
+        schema = super(DigitalassetfieldsPlugin, self).create_package_schema()
+        schema = self._modify_package_schema(schema)
+        return schema
+
    def update_package_schema(self):
         schema = super(DigitalassetfieldsPlugin, self).update_package_schema()
-        # our custom field
-        schema.update({
-            'custom_text': [tk.get_validator('ignore_missing'),
-                            tk.get_converter('convert_to_extras')]
-        })
+        schema = self._modify_package_schema(schema)
         return schema
+
 
    def show_package_schema(self):
         schema = super(DigitalassetfieldsPlugin, self).show_package_schema()
         schema.update({
             'custom_text': [tk.get_converter('convert_from_extras'),
+                            tk.get_validator('ignore_missing')],
+            'asset_type': [tk.get_converter('convert_from_extras'),
+                            tk.get_validator('ignore_missing')],
+            'related_projects': [tk.get_converter('convert_from_extras'),
+                            tk.get_validator('ignore_missing')],
+            'related_publications': [tk.get_converter('convert_from_extras'),
+                            tk.get_validator('ignore_missing')],
+            'asset_owner': [tk.get_converter('convert_from_extras'),
+                            tk.get_validator('ignore_missing')],
+            'asset_status': [tk.get_converter('convert_from_extras'),
+                            tk.get_validator('ignore_missing')],
+            'expl_notes': [tk.get_converter('convert_from_extras'),
+                            tk.get_validator('ignore_missing')],
+            'description': [tk.get_converter('convert_from_extras'),
+                            tk.get_validator('ignore_missing')],
+            'other_affiliates': [tk.get_converter('convert_from_extras'),
                             tk.get_validator('ignore_missing')]
         })
         return schema

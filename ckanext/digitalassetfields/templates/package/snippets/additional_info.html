@@ -1,10 +1,69 @@
 {% ckan_extends %}
 
 {% block extras %}
+
   {% if pkg_dict.custom_text %}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Custom Text") }}</th>
       <td class="dataset-details">{{ pkg_dict.custom_text }}</td>
     </tr>
   {% endif %}
+
+  {% if pkg_dict.other_affiliates%}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Other affiliates") }}</th>
+      <td class="dataset-details">{{ pkg_dict.other_affiliates}}</td>
+    </tr>
+  {% endif %}
+
+  {% if pkg_dict.asset_type%}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Asset type") }}</th>
+      <td class="dataset-details">{{ pkg_dict.asset_type}}</td>
+    </tr>
+  {% endif %}
+
+  {% if pkg_dict.asset_status%}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Asset status") }}</th>
+      <td class="dataset-details">{{ pkg_dict.asset_status}}</td>
+    </tr>
+  {% endif %}
+
+  {% if pkg_dict.asset_owner%}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Asset owner") }}</th>
+      <td class="dataset-details">{{ pkg_dict.asset_owner}}</td>
+    </tr>
+  {% endif %}
+
+  {% if pkg_dict.related_projects%}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Related projects") }}</th>
+      <td class="dataset-details">{{ pkg_dict.related_projects}}</td>
+    </tr>
+  {% endif %}
+
+  {% if pkg_dict.related_publications%}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Related publications") }}</th>
+      <td class="dataset-details">{{ pkg_dict.related_publications}}</td>
+    </tr>
+  {% endif %}
+
+
+  {% if pkg_dict.expl_notes%}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Explanatory notes") }}</th>
+      <td class="dataset-details">{{ pkg_dict.expl_notes}}</td>
+    </tr>
+  {% endif %}
+
+  {% if pkg_dict.verified%}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Verified?") }}</th>
+      <td class="dataset-details">{{ pkg_dict.verified}}</td>
+    </tr>
+  {% endif %}
+
 {% endblock %}

@@ -8,7 +8,7 @@
   {{ form.input('asset_owner', label=_('Asset owner'), id='field-asset_owner', placeholder=_('Asset owner'), value=data.asset_owner, error=errors.asset_owner, classes=['control-medium']) }}
   {{ form.input('related_projects', label=_('Related projects'), id='field-related_projects', placeholder=_('Related project'), value=data.related_projects, error=errors.related_projects, classes=['control-medium']) }}
   {{ form.input('related_publications', label=_('Related publications'), id='field-related_publications', placeholder=_('Related publications'), value=data.related_publications, error=errors.related_publications, classes=['control-medium']) }}
-  {{ form.textarea('notes', label=_('Notes'), id='field-notes', placeholder=_('Notes to DAMC'), value=data.notes, error=errors.notes, classes=['control-medium']) }}
+  {{ form.textarea('expl_notes', label=_('Explanatory Notes'), id='field-expl_notes', placeholder=_('Notes to DAMC'), value=data.expl_notes, error=errors.expl_notes, classes=['control-medium']) }}
   {{ form.checkbox('verified', label=_('Verified'), id='field-verify', checked=false, error=errors.verified) }}
 
 {% endblock %}
