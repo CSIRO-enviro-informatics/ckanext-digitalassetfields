@@ -2,7 +2,7 @@
 {% import 'macros/form.html' as form %}
 
 {% block package_basic_fields_custom %}
-  {{ form.input('other_affiliates', label=_('Other affiliates'), id='field-other_affiliates', placeholder=_('Other affiliates'), value=data.other_affiliates, error=errors.other_affiliates, classes=['control-medium']) }}
+  {{ form.input('other_affiliates', label=_('Other affiliatessss'), id='field-other_affiliates', placeholder=_('Other affiliates'), value=data.other_affiliates, error=errors.other_affiliates, classes=['control-medium']) }}
   {{ form.select('asset_type', label=_('Asset type'), id='field-asset_type', options=[{'value':'dataset', 'name':'Data collection', 'text':'Data collection'}, {'value':'software', 'text':'Software'},{'value':'web-service', 'text':'Web Service'}, {'value':'other', 'text':'Other'}], error=errors.asset_type, classes=['control-medium']) }}
   {{ form.select('asset_status', label=_('Asset status'), id='field-asset_status', options=[{'value':'not_managed-media_storage', 'text':'Not corporately managed - Media storage or USB'}, {'value':'not_managed-localcomputer', 'text':'Not corporately managed - Local computer'}, {'value':'not_managed-network_drive', 'text':'Not corporately managed - Network drive'}, {'value':'published_external-repo', 'text':'Published via external repository'}, {'value':'published-dap', 'text':'Published via CSIRO DAP'}], error=errors.asset_status, classes=['control-medium']) }}
   {{ form.input('asset_owner', label=_('Asset owner'), id='field-asset_owner', placeholder=_('Asset owner'), value=data.asset_owner, error=errors.asset_owner, classes=['control-medium']) }}
