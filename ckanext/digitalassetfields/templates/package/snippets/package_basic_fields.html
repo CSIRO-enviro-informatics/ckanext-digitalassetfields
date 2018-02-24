@@ -3,14 +3,14 @@
 
 {% block package_basic_fields_custom %}
   {% block package_other_affiliates %}
-    {% set tag_attrs = {'data-module': 'autocomplete', 'data-module-key': 'id', 'data-module-label': 'fullname', 'data-module-tags': '', 'data-module-source': '/api/2/util/user/autocomplete?q=?'} %}
+    {% set tag_attrs = {'data-module': 'autocomplete', 'data-module-key': 'id', 'data-module-label': 'fullname', 'data-module-tags': '', 'data-module-source': '/api/2/util/user/autocomplete/json?q=?'} %}
     {{ form.input('other_affiliates', id='field-tags', label=_('Other affiliates'), placeholder=_('Other affiliates'), value=data.other_affiliates, error=errors.other_affiliates, classes=['control-full'], attrs=tag_attrs) }}
   {% endblock %}
 
   {{ form.select('asset_type', label=_('Asset type'), id='field-asset_type', options=[{'value':'dataset', 'name':'Data collection', 'text':'Data collection'}, {'value':'software', 'text':'Software'},{'value':'web-service', 'text':'Web Service'}, {'value':'other', 'text':'Other'}], error=errors.asset_type, classes=['control-medium']) }}
   {{ form.select('asset_status', label=_('Asset status'), id='field-asset_status', options=[{'value':'not_managed-media_storage', 'text':'Not corporately managed - Media storage or USB'}, {'value':'not_managed-localcomputer', 'text':'Not corporately managed - Local computer'}, {'value':'not_managed-network_drive', 'text':'Not corporately managed - Network drive'}, {'value':'published_external-repo', 'text':'Published via external repository'}, {'value':'published-dap', 'text':'Published via CSIRO DAP'}], error=errors.asset_status, classes=['control-medium']) }}
   {% block package_asset_owner %}
-    {% set tag_attrs = {'data-module': 'autocomplete', 'data-module-key': 'id', 'data-module-label': 'fullname', 'data-module-tags': '', 'data-module-source': '/api/2/util/user/autocomplete?q=?'} %}
+    {% set tag_attrs = {'data-module': 'autocomplete','data-module-key': 'id', 'data-module-label': 'fullname', 'data-module-tags': '', 'data-module-source': '/api/2/util/user/autocomplete/json?q=?'} %}
     {{ form.input('asset_owner', id='field-tags', label=_('Asset owner'), placeholder=_('Asset Owner'), value=data.asset_owner, error=errors.asset_owner, classes=['control-full'], attrs=tag_attrs) }}
   {% endblock %}
   {{ form.input('related_projects', label=_('Related projects'), id='field-related_projects', placeholder=_('Related project'), value=data.related_projects, error=errors.related_projects, classes=['control-medium']) }}
