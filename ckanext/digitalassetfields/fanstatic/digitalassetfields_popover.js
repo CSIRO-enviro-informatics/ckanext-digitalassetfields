@@ -6,7 +6,7 @@
 ckan.module('digitalassetfields_popover', function ($) {
   return {
     initialize: function () {
-      console.log("I've been initialized for element: ", this.el);
+      console.log("digitalassetfields_popover - I've been initialized for element: ", this.el);
     }
   };
 });
