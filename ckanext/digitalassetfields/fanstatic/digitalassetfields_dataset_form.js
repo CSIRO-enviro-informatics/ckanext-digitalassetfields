@@ -11,7 +11,8 @@ ckan.module('digitalassetfields_project_select', function ($) {
       this.el.change(function() {
          console.log( "Handler for .change() called. ", $(this) );
 
-         url = "http://network.csiro.au:9500/standalone/projects.json?namecontains=" + $(this).value
+         var url = "http://network.csiro.au:9500/standalone/projects.json?namecontains=" + $(this).value;
+         console.log( "url: ", url);
          $.get( url, function( data ) {
             console.log( 'Querying network.csiro.au');
             console.log( data);
