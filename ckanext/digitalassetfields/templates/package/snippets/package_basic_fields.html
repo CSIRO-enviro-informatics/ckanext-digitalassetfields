@@ -15,12 +15,12 @@
   {% endblock %}
 
   {% block package_related_projects %}
-    {% set tag_attrs = {'data-module': 'autocomplete', 'data-module-key': 'wbscode', 'data-module-label': 'name', 'data-module-tags': '', 'data-module-source': 'http://localhost:3000/projects?namecontains=?'} %}
+    {% set tag_attrs = {'data-module': 'autocomplete', 'data-module-key': 'wbscode', 'data-module-label': 'name', 'data-module-tags': '', 'data-module-source': 'http://localhost:43210/projects?namecontains=?'} %}
   {{ form.input('related_projects', label=_('Related projects'), id='field-tags', placeholder=_('Related project'), value=data.related_projects, error=errors.related_projects, classes=['control-medium'], attrs=tag_attrs) }}
   {% endblock %}
 
   {% block package_related_publications %}
-    {% set tag_attrs = {'data-module': 'autocomplete', 'data-module-key': '_about', 'data-module-label': 'name', 'data-module-tags': '', 'data-module-source': 'http://localhost:3000/publications?title=?'} %}
+    {% set tag_attrs = {'data-module': 'autocomplete', 'data-module-key': '_about', 'data-module-label': 'name', 'data-module-tags': '', 'data-module-source': 'http://localhost:43210/publications?title=?'} %}
   {{ form.input('related_publications', label=_('Related publications'), id='field-tags', placeholder=_('Related publications'), value=data.related_publications, error=errors.related_publications, classes=['control-full'] , attrs=tag_attrs) }}
   {% endblock %}
 
