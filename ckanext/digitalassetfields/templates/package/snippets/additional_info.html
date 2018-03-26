@@ -1,7 +1,7 @@
 {% ckan_extends %}
 
 {% block extras %}
-  {% resource 'digitalassetfields/digitalassetfields_tooltips.js' %}
+  {% resource 'digitalassetfields/digitalassetfields_render_form.js' %}
 
 
   {% if pkg_dict.custom_text %}
@@ -14,14 +14,14 @@
   {% if pkg_dict.other_affiliates%}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Other affiliates") }}</th>
-      <td class="dataset-details">{{ pkg_dict.other_affiliates}}</td>
+      <td class="dataset-details" data-module="digitalassetfields_render_person">{{ pkg_dict.other_affiliates}}</td>
     </tr>
   {% endif %}
 
   {% if pkg_dict.asset_type%}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Asset type") }}</th>
-      <td class="dataset-details">{{ pkg_dict.asset_type}}</td>
+      <td class="dataset-details" data-module="digitalassetfields_render_form">{{ pkg_dict.asset_type}}</td>
     </tr>
   {% endif %}
 
@@ -35,21 +35,21 @@
   {% if pkg_dict.asset_owner%}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Asset owner") }}</th>
-      <td class="dataset-details">{{ pkg_dict.asset_owner}}</td>
+      <td class="dataset-details" data-module="digitalassetfields_render_person">{{ pkg_dict.asset_owner}}</td>
     </tr>
   {% endif %}
 
   {% if pkg_dict.related_projects%}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Related projects") }}</th>
-      <td class="dataset-details">{{ pkg_dict.related_projects}}</td>
+      <td class="dataset-details" data-module="digitalassetfields_render_proj">{{ pkg_dict.related_projects}}</td>
     </tr>
   {% endif %}
 
   {% if pkg_dict.related_publications%}
     <tr>
       <th scope="row" class="dataset-label">{{ _("Related publications") }}</th>
-      <td class="dataset-details">{{ pkg_dict.related_publications}}</td>
+      <td class="dataset-details" data-module="digitalassetfields_render_pub">{{ pkg_dict.related_publications}}</td>
     </tr>
   {% endif %}
 
