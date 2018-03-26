@@ -94,17 +94,43 @@ ckan.module('digitalassetfields_render_person', function ($) {
             console.log(data);
             const p_name = data.result.items[0].affiliate.hasName.firstName + " " +  data.result.items[0].affiliate.hasName.lastName;
             const p_id = data.result.items[0].affiliate._about;
-            personMap[p_id] = p_name;
-         });
+           personMap[p_name] = p_id;
+         },
+         function(err) {
+           console.log("Error in getJSON");
+           console.log(api);
+           personMap[item] = '';
+           
+         }
+      );
       })).then(function() {
          console.log("Person getJSON promises all done!");
          console.log(personMap);
          var personArr = [];
          $.each(personMap, function(key, val) {
-            personArr.push("<a href='" +  web + "?id=" + key + "' target='out'>" + val + "</a>");
+            if(val != '') {
+               personArr.push("<a href='" +  web + "?id=" + val + "' target='out'>" + key+ "</a>");
+            }
+            else {
+               personArr.push(key);
+            }
          });
          currElem.html(personArr.join(', '));
         // currElem.html("<a href='" +  web + "?id=" + p_id + "' target='out'>" + p_name + "</a>");
+      }, function(err) {
+         console.log("Person getJSON err caught in .then()!");
+         console.log(err);
+         console.log(personMap);
+         var personArr = [];
+         $.each(personMap, function(key, val) {
+            if(val != '') {
+               personArr.push("<a href='" +  web + "?id=" + val + "' target='out'>" + key+ "</a>");
+            }
+            else {
+               personArr.push(key);
+            }
+         });
+         currElem.html(personArr.join(', '));
       });
 
     }
