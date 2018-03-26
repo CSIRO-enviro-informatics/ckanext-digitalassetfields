@@ -1,7 +1,21 @@
 {% ckan_extends %}
 
-{% block basic_fields_url %}
-{{ super() }}
+{% resource 'digitalassetfields/digitalassetfields_tooltips.js' %}
 
-  {{ form.input('custom_resource_text', label=_('Custom Text'), id='field-custom_resource_text', placeholder=_('custom resource text'), value=data.custom_resource_text, error=errors.custom_resource_text, classes=['control-medium']) }}
+{% block basic_fields_url %}
+   {% set is_upload = (data.url_type == 'upload') %}
+   {{ form.image_upload(data, errors, field_url='url', field_upload='upload', field_clear='clear_upload',
+         is_upload_enabled=h.uploads_enabled(), is_url=data.url and not is_upload, is_upload=is_upload,
+         upload_label=_('Data'), url_label=_('URL'), placeholder=_('http://example.com/external-data.csv'), field_name='name') }}
 {% endblock %}
+
+{% block basic_fields_name %}
+      {{ form.input('name', id='field-name', label=_('Name'), placeholder=_('eg. Jan 2018 Hydrology Resource'), value=data.name, error=errors.name, classes=['control-full']) }}
+{% endblock %}
+
+{% block basic_fields_description %}
+      {{ form.markdown('description', id='field-description', label=_('Description'), placeholder=_('Some useful notes about the data'), value=data.description, error=errors.description) }}
+{% endblock %}
+
+
+

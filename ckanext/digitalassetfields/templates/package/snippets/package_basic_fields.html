@@ -40,8 +40,26 @@
   {% endblock %}
 
   {% block package_verified %}
-    {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-tooltip': 'Verified? ...'}  %}
-    {{ form.checkbox('verified', label=_('Verified'), id='field-verify', checked=false, error=errors.verified, attrs=tag_attrs) }}
+     {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-tooltip': 'Select "true" to verify this dataset.'}  %}
+     {{ form.select('verified', label=_('Verified'), id='field-verified', options=[{'value':'False', 'name':'False', 'text':'False'}, {'value':'True', 'name':'True', 'text':'True'}], error=errors.verified, classes=['control-medium'], attrs = tag_attrs) }}
   {% endblock %}
+
+
+  {% block package_basic_fields_tags %}
+  {% endblock %}
+
+  {% block package_tags %}
+    {% set tag_attrs = {'data-module': 'autocomplete digitalassetfields_tooltips',  'data-module-tooltip': 'Keywords or tags associated with this dataset.', 'data-module-tags': '', 'data-module-source': '/api/2/util/tag/autocomplete?incomplete=?'} %}
+    {{ form.input('tag_string', id='field-tags', label=_('Tags'), placeholder=_('eg. economy, mental health, government'), value=data.tag_string, error=errors.tags, classes=['control-full'], attrs=tag_attrs) }}
+  {% endblock %}
+
+  {% block package_basic_fields_description %}
+  {% endblock %}
+
+  {% block package_description %}
+    {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-tooltip': 'Description...'}  %}
+    {{ form.markdown('notes', id='field-notes', label=_('Description'), placeholder=_('eg. Some useful notes about the data'), value=data.notes, error=errors.notes, attrs=tag_attrs) }}
+  {% endblock %}
+
 
 {% endblock %}
