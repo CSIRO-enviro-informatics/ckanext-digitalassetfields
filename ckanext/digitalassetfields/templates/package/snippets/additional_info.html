@@ -1,8 +1,22 @@
 {% ckan_extends %}
 
-{% block extras %}
-  {% resource 'digitalassetfields/digitalassetfields_render_form.js' %}
 
+
+{% block extras %}
+{% resource 'digitalassetfields/digitalassetfields_render_form.js' %}
+        {% if pkg_dict.author %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _("Author") }}</th>
+            <td class="dataset-details" property="dc:creator" data-module="digitalassetfields_render_person">{{ pkg_dict.author }}</td>
+          </tr>
+        {% endif %}
+
+        {% if pkg_dict.maintainer %}
+          <tr>
+            <th scope="row" class="dataset-label">{{ _('Maintainer') }}</th>
+            <td class="dataset-details" property="dc:contributor" data-module="digitalassetfields_render_person">{{ pkg_dict.maintainer }}</td>
+          </tr>
+        {% endif %}
 
   {% if pkg_dict.custom_text %}
     <tr>
