@@ -13,13 +13,25 @@
   {% endblock %}
 
   {% block package_metadata_author %}
-    {% set tag_attrs = {'data-module': 'autocomplete digitalassetfields_tooltips', 'data-module-tooltip': 'Author of this dataset.', 'data-module-key': 'name', 'data-module-label': 'fullname', 'data-module-tags': '', 'data-module-source': '/api/2/util/user/autocomplete?q=?'} %}
-    {{ form.input('author', label=_('Author'), id='field-author', placeholder=_('Joe Bloggs'), value=data.author, error=errors.author, classes=['control-medium'], attrs=tag_attrs) }}
+    {% set tag_attrs = {'data-module': 'autocomplete digitalassetfields_tooltips', 'data-module-tooltip': 'People who are the authors of this digital asset record.', 'data-module-key': 'name', 'data-module-label': 'fullname', 'data-module-tags': '', 'data-module-source': '/api/2/util/user/autocomplete?q=?'} %}
+    {% if data.author is not defined %}
+    {% set curr_author = c.userobj.name  %}
+    {% else %}
+    {% set curr_author = data.author %}
+    {% endif %}
+    {{ form.input('author', label=_('Author'), id='field-author', placeholder=_('Joe Bloggs'), 
+        value=curr_author, error=errors.author, classes=['control-medium'], attrs=tag_attrs) 
+    }}
   {% endblock %}
 
   {% block package_metadata_fields_maintainer %}
-    {% set tag_attrs = {'data-module': 'autocomplete digitalassetfields_tooltips', 'data-module-tooltip': 'Maintainer of this dataset.', 'data-module-key': 'name', 'data-module-label': 'fullname', 'data-module-tags': '', 'data-module-source': '/api/2/util/user/autocomplete?q=?'} %}
-    {{ form.input('maintainer', label=_('Maintainer'), id='field-maintainer', placeholder=_('Joe Bloggs'), value=data.maintainer, error=errors.maintainer, classes=['control-medium'], attrs=tag_attrs) }}
+    {% set tag_attrs = {'data-module': 'autocomplete digitalassetfields_tooltips', 'data-module-tooltip': 'People who are maintainers of this digital asset.', 'data-module-key': 'name', 'data-module-label': 'fullname', 'data-module-tags': '', 'data-module-source': '/api/2/util/user/autocomplete?q=?'} %}
+    {% if data.maintainer is not defined %}
+    {% set curr_maintainer = c.userobj.name  %}
+    {% else %}
+    {% set curr_maintainer = data.maintainer %}
+    {% endif %}
+    {{ form.input('maintainer', label=_('Maintainer'), id='field-maintainer', placeholder=_('Joe Bloggs'), value=curr_maintainer, error=errors.maintainer, classes=['control-medium'], attrs=tag_attrs) }}
 
   {% endblock %}
 
