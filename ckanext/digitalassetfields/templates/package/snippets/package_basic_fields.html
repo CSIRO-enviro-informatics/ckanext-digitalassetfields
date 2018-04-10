@@ -25,13 +25,13 @@
   {% endblock %}
 
   {% block package_asset_status %}
-    {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'The current status of this digital asset - not managed, not corporately managed, published'}  %}
-    {{ form.select('asset_status', label=_('Asset status'), id='field-asset_status', options=[{'value':'not_managed-media_storage', 'text':'Not corporately managed - Media storage or USB'}, {'value':'not_managed-localcomputer', 'text':'Not corporately managed - Local computer'}, {'value':'not_managed-network_drive', 'text':'Not corporately managed - Network drive'}, {'value':'published_external-repo', 'text':'Published via external repository'}, {'value':'published-dap', 'text':'Published via CSIRO DAP'}], error=errors.asset_status, classes=['control-medium'], attrs=tag_attrs) }}
+    {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'Where is this digital asset currently managed or archived?'}  %}
+    {{ form.select('asset_status', label=_('Asset status'), id='field-asset_status', options=[{'value':'sm_local-media_storage', 'text':'Self-managed on media storage (USB, ext hard drive)'}, {'value':'sm_local-pc', 'text':'Self-managed on Local computer'}, {'value':'sm_network_drive', 'text':'Self-managed on Network drive'}, {'value': 'tm_network_drive', 'text': 'Team-managed on Network drive'}, {'value':'published_external-repo', 'text':'Published via external repository'}, {'value':'published_dap', 'text':'Published via CSIRO DAP'}, {'value':'other', 'text':"Other (add notes)"}], error=errors.asset_status, classes=['control-medium'], attrs=tag_attrs) }}
   {% endblock %}
 
   {% block package_asset_owner %}
-    {% set tag_attrs = {'data-module': 'autocomplete digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'Field to specify a person who is the owner of this digital asset.', 'data-module-key': 'name', 'data-module-label': 'fullname', 'data-module-tags': '', 'data-module-source': '/api/2/util/user/autocomplete?q=?'} %}
-    {{ form.input('asset_owner', id='field-tags', label=_('Asset owner'), placeholder=_('Asset Owner'), value=data.asset_owner, error=errors.asset_owner, classes=['control-full'], attrs=tag_attrs) }}
+    {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'Field to specify the organisations who is the owner of this digital asset. This could be CSIRO or an external organisation in the case that the data was procured from external sources. ' } %}
+    {{ form.input('asset_owner', id='field-tags', label=_('Asset owner'), placeholder=_('e.g. CSIRO'), value=data.asset_owner, error=errors.asset_owner, classes=['control-full'], attrs=tag_attrs) }}
   {% endblock %}
 
   {% block package_related_projects %}
@@ -50,7 +50,7 @@
   {% endblock %}
 
   {% block package_verified %}
-     {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'Select "true" to verify this digital asset.'}  %}
+     {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'Field for users to verify that the details of the digital asset is as intended by the author or maintainer. <br/><br/>This is important in the case where automated processes are used to populate the entry. Manual entries are defaulted to true, whereas automatic imports are defaulted to false. <br/><br/>Select true to verify this digital asset.'}  %}
      {{ form.select('verified', label=_('Verified'), id='field-verified', options=[{'value':'False', 'name':'False', 'text':'False'}, {'value':'True', 'name':'True', 'text':'True'}], error=errors.verified, classes=['control-medium'], attrs = tag_attrs) }}
   {% endblock %}
 
