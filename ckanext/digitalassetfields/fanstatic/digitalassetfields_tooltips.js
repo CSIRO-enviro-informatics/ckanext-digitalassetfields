@@ -33,10 +33,19 @@ ckan.module('digitalassetfields_tooltips', function ($) {
       helpIcon.popover({title: title, html: true,
                        content: this._(this.options.tooltip), trigger: 'click', delay: {"hide": 500}, placement: 'left'});
 
+      helpIcon.on('click', function(e) {e.preventDefault(); return true;});
       cgLabel.append(" ", helpIcon);
       //cgLabel.popover({title: 'Info', html: true,
       //                 content: this._(this.options.tooltip), trigger: 'focus click hover', placement: 'left'});
 
+      $('body').on('click', function (e) {
+         $('[data-toggle=popover]').each(function () {
+           // hide any open popovers when the anywhere else in the body is clicked
+           if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+              $(this).popover('hide');
+           }
+       });
+     });
     }
   };
 });
