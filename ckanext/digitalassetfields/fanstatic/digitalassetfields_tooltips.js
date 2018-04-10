@@ -27,11 +27,11 @@ ckan.module('digitalassetfields_tooltips', function ($) {
       }
 
 
-      const helpIcon = $('<a><i class="fa fa-question-circle"></i></a>')
+      const helpIcon = $('<i class="fa fa-question-circle"></i>')
       const title = cgLabel.text();
       const content = "<p>" + cgLabel.text() + "</p>";
       helpIcon.popover({title: title, html: true,
-                       content: this._(this.options.tooltip), trigger: 'hover', delay: {"hide": 500}, placement: 'left'});
+                       content: this._(this.options.tooltip), trigger: 'click', delay: {"hide": 500}, placement: 'left'});
 
       cgLabel.append(" ", helpIcon);
       //cgLabel.popover({title: 'Info', html: true,

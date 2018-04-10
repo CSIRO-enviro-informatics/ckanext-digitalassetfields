@@ -78,21 +78,16 @@
     {% set error = errors.license_id %}
     <label class="control-label" for="field-license">{{ _("License") }}</label>
     <div class="controls">
-          <select id="field-license" name="license_id" data-module="autocomplete digitalassetfields_tooltips" data-module-tooltip="Choose a license for this digital asset. This will help users of this asset to know the limitations of its reuse." >
+          <select id="field-license" name="license_id" data-module="autocomplete digitalassetfields_tooltips" 
+           data-module-tooltip="Choose a license for this digital asset. This will help users of this asset to know the limitations of its reuse.<br/><br/> More advice on licenses can be found below:<br/><br/><a target='license' href='https://confluence.csiro.au/display/LWCH/Digital+Asset+Audit+User+FAQ#DigitalAssetAuditUserFAQ-Q.HowdoIknowwhichlicencetochoosefrom?' class='btn btn-primary btn-lg' role='button'>FAQ</a> 
+             <a target='license' href='http://opendefinition.org/licenses/' class='btn btn-primary btn-lg' role='button'>opendefinition.org</a>
+" >
             {% set existing_license_id = data.get('license_id') %}
             {% for license_id, license_desc in h.license_options(existing_license_id) %}
             <option value="{{ license_id }}" {% if (existing_license_id == license_id) or (existing_license_id == None and license_id == 'notspecified') %}selected="selected"{% endif %}>{{ license_desc }}</option>
             {% endfor %}
           </select>
           {% if error %}<span class="error-block">{{ error }}</span>{% endif %}
-          <span class="info-block info-inline">
-            <i class="fa fa-info-circle"></i>
-            {% trans %}
-            Advice on licenses can be found
-            via <a target="licence" href="https://confluence.csiro.au/display/LWCH/Digital+Asset+Audit+User+FAQ#DigitalAssetAuditUserFAQ-Q.HowdoIknowwhichlicencetochoosefrom?">the FAQ</a>
-            and at <a target="licence" href="http://opendefinition.org/licenses/">opendefinition.org</a>.
-            {% endtrans %}
-          </span>
     </div>
   </div>
 {% endblock %}
