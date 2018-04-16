@@ -71,6 +71,11 @@
     {{ form.markdown('notes', id='field-notes', label=_('Description'), placeholder=_('eg. Some useful notes about the data'), value=data.notes, error=errors.notes, attrs=tag_attrs) }}
   {% endblock %}
 
+  {% block spatial%}
+    {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'Spatial extents - expects geojson'}  %}
+    {{ form.textarea('spatial', label=_('Spatial'), id='field-spatial', placeholder=_(''), value=data.spatial, error=errors.spatial, classes=['control-medium'], attrs=tag_attrs ) }}
+  {% endblock %}
+
 {% endblock %}
 
 {% block package_basic_fields_license %}
