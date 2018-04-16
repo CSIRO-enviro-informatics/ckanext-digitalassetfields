@@ -2,20 +2,105 @@
 
 {% resource 'digitalassetfields/digitalassetfields_tooltips.js' %}
 
-{% block basic_fields_url %}
-   {% set is_upload = (data.url_type == 'upload') %}
-   {{ form.image_upload(data, errors, field_url='url', field_upload='upload', field_clear='clear_upload',
-         is_upload_enabled=h.uploads_enabled(), is_url=data.url and not is_upload, is_upload=is_upload,
-         upload_label=_('Data'), url_label=_('URL'), placeholder=_('http://example.com/external-data.csv or file://<some file share>'), field_name='name') }}
-{% endblock %}
+{% block basic_fields %}
+{% resource 'digitalassetfields/digitalassetfields_restricted.js' %}
 
-{% block basic_fields_name %}
+   {% block basic_fields_name %}
       {{ form.input('name', id='field-name', label=_('Name'), placeholder=_('eg. Jan 2018 Hydrology Resource'), value=data.name, error=errors.name, classes=['control-full']) }}
-{% endblock %}
+   {% endblock %}
 
-{% block basic_fields_description %}
+    {% block basic_fields_description %}
       {{ form.markdown('description', id='field-description', label=_('Description'), placeholder=_('Some useful notes about the data'), value=data.description, error=errors.description) }}
-{% endblock %}
+    {% endblock %}
+
+
+   {% block basic_fields_url %}
+      {% set is_upload = (data.url_type == 'upload') %}
+      {{ form.image_upload(data, errors, field_url='url', field_upload='upload', field_clear='clear_upload',
+            is_upload_enabled=h.uploads_enabled(), is_url=data.url and not is_upload, is_upload=is_upload,
+            upload_label=_('Data'), url_label=_('URL'), placeholder=_('http://example.com/external-data.csv or file://<some file share>'), field_name='name') }}
+   {% endblock %}
+
+    {% block basic_fields_format %}
+      {% set format_attrs = {'data-module': 'autocomplete', 'data-module-source': '/api/2/util/resource/format_autocomplete?incomplete=?'} %}
+      {% call form.input('format', id='field-format', label=_('Format'), placeholder=_('eg. CSV, XML or JSON'), value=data.format, error=errors.format, classes=['control-medium'], attrs=format_attrs) %}
+        <span class="info-block info-block-small">
+          <i class="fa fa-info-circle"></i>
+          {{ _('This will be guessed automatically. Leave blank if you wish') }}
+        </span>
+      {% endcall %}
+    {% endblock %}
+
+
+   {% block restricted %}
+      {% set tag_attrs = {'data-module': 'digitalassetfields_restricted', 'data-module-restricted': ''} %}
+
+      {% if (data.restricted != None) %} 
+         {{ form.hidden('restricted', data.restricted) }}
+      {% else %}
+         {{ form.hidden('restricted', '{"level": "", "allowed_users":""}') }}
+      {% endif %}
+
+ <div class="control-group">
+    <label class="control-label">{{ _("Access ") }}</label>
+    <div class="controls">
+
+      <div>
+      <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">
+         Set resource permissions
+      </button>
+         <span>
+         <i id="access-icon" class="fa fa-unlock"></i>
+          <span id="access-text">General Access</span>
+         </span>
+      </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-module="digitalassetfields_restricted" data-module-restricted=''  >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Specify access permissions for resource</h5>
+      </div>
+      <div class="modal-body">
+
+<div class="radio">
+  <label><input type="radio" name="optradio">General access</label>
+</div>
+<div class="radio">
+  <label><input type="radio" value='registered' name="optradio">Registered users</label>
+</div>
+<div class="radio">
+  <label><input type="radio" value='same_organization' name="optradio">Same organizational unit</label>
+</div>
+<div class="radio">
+  <label><input type="radio" value='only_allowed_users' name="optradio">Specified users</label>
+</div>
+</div>
+<div id="restricted_allowed_users" class="hidden">
+{% block package_other_affiliates %}
+    {% set tag_attrs = {'data-module': 'autocomplete', 'data-module-key': 'name', 'data-module-label': 'fullname', 'data-module-tags': '', 'data-module-source': '/api/2/util/user/autocomplete?q=?'} %}
+    {{ form.input('allowed_users', id='field-allowed_users', label=_('Allowed users'),  placeholder=_('e.g. NEXUS username'), value=data.allowed_users, error=errors.allowed_users, classes=['control-small'], attrs=tag_attrs) }}
+  {% endblock %}
+</div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" id='restricted_save' class="btn btn-primary" data-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    {% endblock %}
+
+{% endblock basic_fields %}
+
+
+
+
 
 
 
