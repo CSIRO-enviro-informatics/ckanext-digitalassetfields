@@ -49,7 +49,7 @@ ckan.module('digitalassetfields_render_proj', function ($) {
 
       const web = "http://network.csiro.au/project";
       $.when.apply($, arrProj.map(function(item) {
-         const api = "http://network-dev.it.csiro.au:9500/standalone/projects.json";
+         const api = "https://network-dev.it.csiro.au/api/standalone/projects.json";
          const param = { 'wbscode' : item};
          return $.getJSON( api, param).then(function( data ) {
             console.log(data);
@@ -88,7 +88,7 @@ ckan.module('digitalassetfields_render_person', function ($) {
 
       const web = "http://network.csiro.au/person";
       $.when.apply($, arrPerson.map(function(item) {
-         const api = "http://network-dev.it.csiro.au:9500/standalone/id/csiro/affiliation/" + item.toUpperCase() + ".json";
+         const api = "https://network-dev.it.csiro.au/api/standalone/id/csiro/affiliation/" + item.toUpperCase() + ".json";
          const param = {};
          return $.getJSON( api, param).then(function( data ) {
             console.log(data);
@@ -152,7 +152,7 @@ ckan.module('digitalassetfields_render_pub', function ($) {
 
       const web = "http://network.csiro.au/publication";
       $.when.apply($, arrProj.map(function(item) {
-         const api = "http://network-dev.it.csiro.au:9500/standalone/publication.json";
+         const api = "https://network-dev.it.csiro.au/api/standalone/publication.json";
          const param = { 'resource' : item};
          return $.getJSON( api, param).then(function( data ) {
             console.log(data);
