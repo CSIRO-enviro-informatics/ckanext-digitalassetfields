@@ -1,5 +1,6 @@
 "use strict";
 
+
 ckan.module('digitalassetfields_tooltips', function ($) {
   return {
     initialize: function () {
@@ -33,7 +34,21 @@ ckan.module('digitalassetfields_tooltips', function ($) {
       helpIcon.popover({title: title, html: true,
                        content: this._(this.options.tooltip), trigger: 'click', delay: {"hide": 500}, placement: 'left'});
 
-      helpIcon.on('click', function(e) {e.preventDefault(); return true;});
+      helpIcon.on('click', function(e) {
+           e.preventDefault();
+              new Noty({
+               theme: 'relax',
+               type: 'success',
+               timeout: 2000,
+               layout: 'topRight',
+               text: 'Some notification text'
+              })
+              .on('afterShow', function() {
+                 console.log("noty");
+               })
+              .show();
+
+           return true;});
       cgLabel.append(" ", helpIcon);
       //cgLabel.popover({title: 'Info', html: true,
       //                 content: this._(this.options.tooltip), trigger: 'focus click hover', placement: 'left'});
@@ -43,6 +58,8 @@ ckan.module('digitalassetfields_tooltips', function ($) {
            // hide any open popovers when the anywhere else in the body is clicked
            if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
               $(this).popover('hide');
+
+
            }
        });
      });

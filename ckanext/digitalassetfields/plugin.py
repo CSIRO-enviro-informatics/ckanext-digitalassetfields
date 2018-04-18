@@ -84,4 +84,5 @@ class DigitalassetfieldsPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
         tk.add_template_directory(config, 'templates')
         tk.add_public_directory(config, 'public')
         tk.add_resource('fanstatic', 'digitalassetfields')
+        tk.add_resource('resources', 'resources')
 
