@@ -51,6 +51,16 @@
     {{ form.textarea('expl_notes', label=_('Explanatory Notes'), id='field-expl_notes', placeholder=_('Notes to DAMC'), value=data.expl_notes, error=errors.expl_notes, classes=['control-medium'], attrs=tag_attrs ) }}
   {% endblock %}
 
+  {% block package_spatial_things %}
+    {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'Spatial extents - expects geojson'}  %}
+    {{ form.textarea('spatial', label=_('Spatial'), id='field-spatial', placeholder=_(''), value=data.spatial, error=errors.spatial, classes=['control-medium'], attrs=tag_attrs ) }}
+  {% endblock %}
+
+  {% block package_test %}
+    {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'Spatial extents - expects geojson'}  %}
+    {{ form.textarea('test', label=_('test'), id='field-test', placeholder=_(''), value=data.test, error=errors.test, classes=['control-medium'], attrs=tag_attrs ) }}
+  {% endblock %}
+
   {% block package_verified %}
      {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'Field for users to verify that the details of the digital asset is as intended by the author or maintainer. <br/><br/>This is important in the case where automated processes are used to populate the entry. Manual entries are defaulted to true, whereas automatic imports are defaulted to false. <br/><br/>Select true to verify this digital asset.'}  %}
      {{ form.select('verified', label=_('Verified'), id='field-verified', options=[{'value':'False', 'name':'False', 'text':'False'}, {'value':'True', 'name':'True', 'text':'True'}], error=errors.verified, classes=['control-medium'], attrs = tag_attrs) }}
@@ -73,10 +83,6 @@
     {{ form.markdown('notes', id='field-notes', label=_('Description'), placeholder=_('eg. Some useful notes about the data'), value=data.notes, error=errors.notes, attrs=tag_attrs) }}
   {% endblock %}
 
-  {% block spatial%}
-    {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'Spatial extents - expects geojson'}  %}
-    {{ form.textarea('spatial', label=_('Spatial'), id='field-spatial', placeholder=_(''), value=data.spatial, error=errors.spatial, classes=['control-medium'], attrs=tag_attrs ) }}
-  {% endblock %}
 
 {% endblock %}
 

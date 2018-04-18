@@ -36,17 +36,17 @@ ckan.module('digitalassetfields_tooltips', function ($) {
 
       helpIcon.on('click', function(e) {
            e.preventDefault();
-              new Noty({
-               theme: 'relax',
-               type: 'success',
-               timeout: 2000,
-               layout: 'topRight',
-               text: 'Some notification text'
-              })
-              .on('afterShow', function() {
-                 console.log("noty");
-               })
-              .show();
+              //new Noty({
+              // theme: 'relax',
+              // type: 'success',
+              // timeout: 2000,
+              // layout: 'topRight',
+              // text: 'Some notification text'
+              //})
+              //.on('afterShow', function() {
+              //   console.log("noty");
+              // })
+             // .show();
 
            return true;});
       cgLabel.append(" ", helpIcon);

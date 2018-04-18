@@ -129,6 +129,19 @@
       <td class="dataset-details">{{ pkg_dict.expl_notes}}</td>
     </tr>
   {% endif %}
+  {% if pkg_dict.spatial%}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Spatial") }}</th>
+      <td class="dataset-details">
+         {% set dataset_extent = pkg_dict.spatial %}
+         {% if dataset_extent %}
+           {% snippet "spatial/snippets/dataset_map.html", extent=dataset_extent %}
+         {% endif %}
+
+         {{ pkg_dict.spatial}}
+      </td>
+    </tr>
+  {% endif %}
 
   {% if pkg_dict.verified%}
     <tr>
