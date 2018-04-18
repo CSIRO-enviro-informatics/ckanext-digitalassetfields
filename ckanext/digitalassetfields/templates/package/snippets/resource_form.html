@@ -6,28 +6,24 @@
 {% resource 'digitalassetfields/digitalassetfields_restricted.js' %}
 
    {% block basic_fields_name %}
-      {{ form.input('name', id='field-name', label=_('Name'), placeholder=_('eg. Jan 2018 Hydrology Resource'), value=data.name, error=errors.name, classes=['control-full']) }}
+      {{ form.input('name', id='field-name', label=_('Name'), placeholder=_('eg. Bowen storage location for reference climate datasets'), value=data.name, error=errors.name, classes=['control-full']) }}
    {% endblock %}
 
     {% block basic_fields_description %}
-      {{ form.markdown('description', id='field-description', label=_('Description'), placeholder=_('Some useful notes about the data'), value=data.description, error=errors.description) }}
+      {{ form.markdown('description', id='field-description', label=_('Description'), placeholder=_('Description of the digital asset resource'), value=data.description, error=errors.description) }}
     {% endblock %}
 
 
    {% block basic_fields_url %}
       {% set is_upload = (data.url_type == 'upload') %}
       {{ form.image_upload(data, errors, field_url='url', field_upload='upload', field_clear='clear_upload',
-            is_upload_enabled=h.uploads_enabled(), is_url=data.url and not is_upload, is_upload=is_upload,
-            upload_label=_('Data'), url_label=_('URL'), placeholder=_('http://example.com/external-data.csv or file://<some file share>'), field_name='name') }}
+            is_upload_enabled=False, is_url=data.url and not is_upload, is_upload=is_upload,
+            upload_label=_('Data'), url_label=_('Web link (URL)'), placeholder=_('http://example.com/external-data.csv or file://<some file share>'), field_name='name') }}
    {% endblock %}
 
     {% block basic_fields_format %}
       {% set format_attrs = {'data-module': 'autocomplete', 'data-module-source': '/api/2/util/resource/format_autocomplete?incomplete=?'} %}
-      {% call form.input('format', id='field-format', label=_('Format'), placeholder=_('eg. CSV, XML or JSON'), value=data.format, error=errors.format, classes=['control-medium'], attrs=format_attrs) %}
-        <span class="info-block info-block-small">
-          <i class="fa fa-info-circle"></i>
-          {{ _('This will be guessed automatically. Leave blank if you wish') }}
-        </span>
+      {% call form.input('format', id='field-format', label=_('Format'), placeholder=_('eg. CSV, ZIP, JSON, WMS, File Share or Git repo'), value=data.format, error=errors.format, classes=['control-full'], attrs=format_attrs) %}
       {% endcall %}
     {% endblock %}
 

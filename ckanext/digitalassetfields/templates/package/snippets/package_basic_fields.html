@@ -16,24 +16,39 @@
 
 {% block package_basic_fields_custom %}
   {% resource 'digitalassetfields/digitalassetfields_tooltips.js' %}
+  {% resource 'digitalassetfields/digitalassetfields_notifications.js' %}
   {% resource 'resources/noty' %}
+  {% set form_style = c.form_style or c.action %}
+
+
+  <div data-module="digitalassetfields_notifications" data-module-action="{{form_style}}">
+  <div class="inline-box">
   {% block package_asset_type %}
      {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'Asset type refers to a digital asset of these kinds: Data collection / Software / Other digital asset'}  %}
-     {{ form.select('asset_type', label=_('Asset type'), id='field-asset_type', options=[{'value':'dataset', 'name':'Data collection', 'text':'Data collection'}, {'value':'software', 'text':'Software'},{'value':'web-service', 'text':'Web Service'}, {'value':'other', 'text':'Other'}], error=errors.asset_type, classes=['control-medium'], attrs = tag_attrs) }}
+     {{ form.select('asset_type', label=_('Asset type'), id='field-asset_type', options=[{'value':'dataset', 'name':'Data collection', 'text':'Data collection'}, {'value':'software', 'text':'Software'},{'value':'web-service', 'text':'Web Service'}, {'value':'other', 'text':'Other'}], error=errors.asset_type, classes=['control-small'], attrs = tag_attrs) }}
   {% endblock %}
+  </div>
+  <div class="inline-box">
   {% block package_asset_status %}
     {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'Where is this digital asset currently managed or archived?'}  %}
-    {{ form.select('asset_status', label=_('Asset status'), id='field-asset_status', options=[{'value':'sm_local-media_storage', 'text':'Self-managed on media storage (USB, ext hard drive)'}, {'value':'sm_local-pc', 'text':'Self-managed on Local computer'}, {'value':'sm_network_drive', 'text':'Self-managed on Network drive'}, {'value': 'tm_network_drive', 'text': 'Team-managed on Network drive'}, {'value':'published_external-repo', 'text':'Published via external repository'}, {'value':'published_dap', 'text':'Published via CSIRO DAP'}, {'value':'other', 'text':"Other (add notes)"}], error=errors.asset_status, classes=['control-medium'], attrs=tag_attrs) }}
+    {{ form.select('asset_status', label=_('Asset status'), id='field-asset_status', options=[{'value':'sm_local-media_storage', 'text':'Self-managed on media storage (USB, ext hard drive)'}, {'value':'sm_local-pc', 'text':'Self-managed on Local computer'}, {'value':'sm_network_drive', 'text':'Self-managed on Network drive'}, {'value': 'tm_network_drive', 'text': 'Team-managed on Network drive'}, {'value':'published_external-repo', 'text':'Published via external repository'}, {'value':'published_dap', 'text':'Published via CSIRO DAP'}, {'value':'other', 'text':"Other (add notes)"}], error=errors.asset_status, classes=['control-full asset-status'], attrs=tag_attrs) }}
   {% endblock %}
+  </div>
+  </div>
+
   {% block package_basic_fields_description2 %}
     {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'A description of the digital asset package. This may include but is not limited to: an abstract or a free-text account of the digital asset.'}  %}
     {{ form.markdown('notes', id='field-notes', label=_('Description'), placeholder=_('eg. Some useful notes about the data'), value=data.notes, error=errors.notes, attrs=tag_attrs) }}
   {% endblock %}
+
+  <div>
+  <div class="inline-box asset-owner">
   {% block package_asset_owner %}
     {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'Field to specify the organisations who is the owner of this digital asset. This could be CSIRO or an external organisation in the case that the data was procured from external sources. ' } %}
     {{ form.input('asset_owner', id='field-tags', label=_('Asset owner'), placeholder=_('e.g. CSIRO'), value=data.asset_owner, error=errors.asset_owner, classes=['control-full'], attrs=tag_attrs) }}
   {% endblock %}
-
+  </div>
+  <div class="inline-box">
 {% block package_basic_license %}
   <div class="control-group">
     {% set error = errors.license_id %}
@@ -52,6 +67,8 @@
     </div>
   </div>
 {% endblock %}
+  </div>
+  </div>
 
 {% endblock %}
 
