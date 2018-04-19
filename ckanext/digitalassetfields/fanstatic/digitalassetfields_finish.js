@@ -31,33 +31,11 @@ ckan.module('digitalassetfields_finish', function ($) {
 	 $('#emoji-finish-modal').removeClass('animated infinite bounce');
       });
 
-      $(this.el).on('click', function(e) {
-	 console.log("Finish clicked!");
-	 e.preventDefault();
-	      /*
-         new Noty({
-               theme: 'relax',
-               type: 'alert',
-               layout: 'center',
-               text: 'You are about to register an asset...!',
-		buttons: [
-			     Noty.button('Confirm registration', 'btn btn-success', function () {
-				             console.log('button 1 clicked');
-				         }, {id: 'button1', 'data-status': 'ok'}),
+      $('#finish-register-btn').on('click', function(e) {
+         $('form#resource-edit').submit();
+      });
 
-			     Noty.button('Cancel', 'btn btn-error', function () {
-				             console.log('button 2 clicked');
-				             n.close();
-				         })
-			   ]
-              })
-              .on('afterShow', function() {
-                 console.log("noty");
-               })
-             .show();
-	      */
-        });
+
      }
-
-    }
+   }
 });
