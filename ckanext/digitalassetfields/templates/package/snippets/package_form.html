@@ -5,5 +5,20 @@
 {% endblock %}
 
 {% block save_button %}
-         <button class="btn btn-primary" type="submit" name="save">{% block save_button_text %}{{ _('Next: Add links') }}{% endblock %}</button>
+{% resource 'digitalassetfields/digitalassetfields_cookies.js' %}
+{% resource 'digitalassetfields/digitalassetfields_finish.js' %}
+{% resource 'resources/noty' %}
+{% resource 'digitalassetfields/animate.css' %}
+{% resource 'digitalassetfields/digitalassetfields.css' %}
+
+{% set datasetname = pkg_name %}
+
+
+ {% if form_style != 'edit' %}
+     <button class="btn btn-primary" type="submit" name="save">{% block save_button_text %}{{ _('Next: Add links') }}{% endblock %}</button>
+     <p>not edit</p>
+ {% else %}
+     {{ super() }}
+     <div style="display:hidden" data-module="digitalassetfields_finish" id="_digitalassetfields_pre-update"></div>
+ {% endif %}
 {% endblock %}

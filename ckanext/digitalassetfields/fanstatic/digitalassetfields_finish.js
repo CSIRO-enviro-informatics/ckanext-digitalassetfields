@@ -13,6 +13,11 @@ ckan.module('digitalassetfields_finish', function ($) {
       console.log("this.options");
       console.log(this.options);
 
+      if($('#_digitalassetfields_pre-update').length > 0) {
+	 const data = {state: 'submitted', id: ''}
+	 setCookie('digitalasset-update', JSON.stringify(data)); 
+      }
+
       $('#finish-cancel-btn').on('mouseenter', function(e) {
 	 console.log("Finish cancel btn hover!");
 	 $('#emoji-finish-img').attr('src', $('#emoji-finish-img').data("cancel"));

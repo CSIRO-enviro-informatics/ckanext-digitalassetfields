@@ -1,6 +1,37 @@
 "use strict";
 
 //required digitalassetfields_cookies.js
+var handleDigitalAssetEvent = function(eventName) {
+	 const cookie_name = eventName;
+         const cookie = getCookie(cookie_name);
+	 const verb_lookup = {
+		 'digitalasset-register' : 'registered',
+		 'digitalasset-update' : 'updated'
+	 }
+         if (cookie) {
+             var c = JSON.parse(cookie);
+             console.log(c);
+             if(c.state == 'submitted') {
+		//cleanup cookie
+		c.state = 'notification-sent';
+		setCookie(cookie_name, JSON.stringify(c)); 
+		eraseCookie(cookie_name);
+		const message = "You have successfully "  + verb_lookup[eventName] + " a digital asset."
+                new Noty({
+	              theme: 'relax',
+	               type: 'success',
+	               layout: 'centerRight',
+	               timeout: 3000,
+	               text: message
+	              })
+                   .on('afterShow', function() {
+                    console.log("noty success");
+                  })
+                  .show();
+             }
+         }
+};
+
 
 ckan.module('digitalassetfields_notifications', function ($) {
   return {
@@ -14,32 +45,9 @@ ckan.module('digitalassetfields_notifications', function ($) {
 
       //handle events where notification is scheduled and info passed via cookies
       if( $('input#_digitalassetfields_notification').length )  {
-         const cookie = getCookie('digitalasset-register');
-         if (cookie) {
-             var c = JSON.parse(cookie);
-             console.log(c);
-             if(c.state == 'submitted') {
-		//cleanup cookie
-		//setCookie('digitalasset-register', ''); 
-		c.state = 'notification-sent';
-		setCookie('digitalasset-register', JSON.stringify(c)); 
-		eraseCookie('digitalasset-register');
-
-                new Noty({
-	              theme: 'relax',
-	               type: 'success',
-	               layout: 'centerRight',
-	               timeout: 3000,
-	               text: 'You have successfully registered a new digital asset.'
-	              })
-                   .on('afterShow', function() {
-                    console.log("noty success");
-                  })
-                  .show();
-
-             }
-         }
-     }
+         handleDigitalAssetEvent('digitalasset-register')
+         handleDigitalAssetEvent('digitalasset-update')
+      }
       
 
       if(this.options.action == 'new') {
