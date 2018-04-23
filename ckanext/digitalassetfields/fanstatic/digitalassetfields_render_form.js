@@ -55,7 +55,10 @@ ckan.module('digitalassetfields_render_proj', function ($) {
             console.log(data);
             const proj_name = data.result.items[0].name;
             const proj_id = data.result.items[0]._about;
-            pMap[proj_id] = proj_name;
+            pMap[proj_id] = { 
+		    'id': item,
+		    'name': proj_name
+	    };
             //currElem.html("<a href='" +  web + "?id=" + proj_id + "' target='out'>" + proj_name + "</a>");
          });
       })).then(function() {
@@ -63,7 +66,7 @@ ckan.module('digitalassetfields_render_proj', function ($) {
          console.log(pMap);
          var pArr = [];
          $.each(pMap, function(key, val) {
-            pArr.push("<a href='" +  web + "?id=" + key + "' target='out'>" + val + "</a>");
+            pArr.push( val.name + " (" + val.id + ") <a href='" +  web + "?id=" + key + "' target='out'><i class='fa fa-external-link'></i></a>");
          });
          currElem.html(pArr.join(', '));
       });
@@ -94,7 +97,10 @@ ckan.module('digitalassetfields_render_person', function ($) {
             console.log(data);
             const p_name = data.result.items[0].affiliate.hasName.firstName + " " +  data.result.items[0].affiliate.hasName.lastName;
             const p_id = data.result.items[0].affiliate._about;
-           personMap[p_name] = p_id;
+           personMap[p_name] = {
+		   'username' : item,
+		   'uri' : p_id
+	   }
          },
          function(err) {
            console.log("Error in getJSON");
@@ -109,7 +115,7 @@ ckan.module('digitalassetfields_render_person', function ($) {
          var personArr = [];
          $.each(personMap, function(key, val) {
             if(val != '') {
-               personArr.push("<a href='" +  web + "?id=" + val + "' target='out'>" + key+ "</a>");
+               personArr.push("<a href='/user/" +  val.username + "'>" + key+ "</a> <a href='" +  web + "?id=" + val.uri + "' target='out'><i class='fa fa-external-link'></i></a>");
             }
             else {
                personArr.push(key);
@@ -164,7 +170,7 @@ ckan.module('digitalassetfields_render_pub', function ($) {
          console.log(pMap);
          var pArr = [];
          $.each(pMap, function(key, val) {
-            pArr.push("<a href='" +  web + "?id=" + key + "' target='out'>" + val + "</a>");
+            pArr.push(val + " <a href='" +  web + "?id=" + key + "' target='out'><i class='fa fa-external-link'></i></a>");
          });
          currElem.html(pArr.join(', '));
       });
