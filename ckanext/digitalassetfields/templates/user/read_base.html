@@ -1,0 +1,6 @@
+{% ckan_extends %}
+
+{% block content_action %}
+  {% if h.check_access('user_update', user) %}
+  {% endif %}
+{% endblock %}
