@@ -5,3 +5,20 @@
 
 {% endblock %}
 
+
+
+{% block primary_content %}
+
+{{super()}}
+{% resource 'digitalassetfields/digitalassetfields_cookies.js' %}
+{% resource 'digitalassetfields/digitalassetfields_notifications.js' %}
+{% resource 'resources/noty' %}
+{% resource 'digitalassetfields/animate.css' %}
+{% resource 'digitalassetfields/digitalassetfields.css' %}
+
+
+<input id="_digitalassetfields_notification" name="_digitalassetfields_notification" type="hidden" value="" data-module='digitalassetfields_notifications'>
+
+
+{% endblock %}
+

@@ -1,5 +1,7 @@
 "use strict";
 
+//requires digitalassetfields_cookies.js
+
 
 ckan.module('digitalassetfields_finish', function ($) {
   return {
@@ -14,11 +16,11 @@ ckan.module('digitalassetfields_finish', function ($) {
       $('#finish-cancel-btn').on('mouseenter', function(e) {
 	 console.log("Finish cancel btn hover!");
 	 $('#emoji-finish-img').attr('src', $('#emoji-finish-img').data("cancel"));
-	 $('#emoji-finish-modal').addClass('animated infinite shake');
+	 //$('#emoji-finish-modal').addClass('animated infinite shake');
 
       }).on('mouseleave', function(e) {
 	 $('#emoji-finish-img').attr('src', $('#emoji-finish-img').data("src"));
-	 $('#emoji-finish-modal').removeClass('animated infinite shake');
+	 //$('#emoji-finish-modal').removeClass('animated infinite shake');
       });
 
       $('#finish-register-btn').on('mouseenter', function(e) {
@@ -32,6 +34,9 @@ ckan.module('digitalassetfields_finish', function ($) {
       });
 
       $('#finish-register-btn').on('click', function(e) {
+	 const data = {state: 'submitted', id: ''}
+
+	 setCookie('digitalasset-register', JSON.stringify(data)); 
          $('form#resource-edit').submit();
       });
 
