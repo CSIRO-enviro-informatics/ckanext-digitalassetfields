@@ -43,7 +43,7 @@
   <div class="inline-box">
   {% block package_asset_status %}
     {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'Where is this digital asset currently managed or archived?'}  %}
-    {{ form.select('asset_status', label=_('Asset status'), id='field-asset_status', options=[{'value':'sm_local-media_storage', 'text':'Self-managed on media storage (USB, ext hard drive)'}, {'value':'sm_local-pc', 'text':'Self-managed on Local computer'}, {'value':'sm_network_drive', 'text':'Self-managed on Network drive'}, {'value': 'tm_network_drive', 'text': 'Team-managed on Network drive'}, {'value':'published_external-repo', 'text':'Published via external repository'}, {'value':'published_dap', 'text':'Published via CSIRO DAP'}, {'value':'other', 'text':"Other (add notes)"}], error=errors.asset_status, classes=['control-full asset-status'], attrs=tag_attrs) }}
+    {{ form.select('asset_status', label=_('Asset status'), id='field-asset_status', options=[{'value':'sm_local-media_storage', 'text':'Self-managed on media storage (USB, ext hard drive)'}, {'value':'sm_local-pc', 'text':'Self-managed on Local computer'}, {'value':'sm_network_drive', 'text':'Self-managed on Network drive'}, {'value': 'tm_network_drive', 'text': 'Team-managed on Network drive'}, {'value': 'tm_network_drive', 'text': 'Team-managed in internal repository'}, {'value':'published_external-repo', 'text':'Published via external repository'}, {'value':'published_dap', 'text':'Published via CSIRO DAP'}, {'value':'other', 'text':"Other (add notes)"}], error=errors.asset_status, classes=['control-full asset-status'], attrs=tag_attrs) }}
   {% endblock %}
   </div>
   </div>
