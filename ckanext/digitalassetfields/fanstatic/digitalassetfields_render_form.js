@@ -91,7 +91,7 @@ ckan.module('digitalassetfields_render_person', function ($) {
 
       const web = "https://network.csiro.au/person";
       $.when.apply($, arrPerson.map(function(item) {
-         const api = "https://network-dev.it.csiro.au/api/standalone/id/csiro/affiliation/" + item.toUpperCase() + ".json";
+         const api = "https://network.csiro.au/api/standalone/id/csiro/affiliation/" + item.toUpperCase() + ".json";
          const param = {};
          return $.getJSON( api, param).then(function( data ) {
             console.log(data);
