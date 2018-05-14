@@ -1,10 +1,14 @@
 # encoding: utf-8
 
+from ckan import __version__ as ckan__version__
 import ckan.plugins as p
 import ckan.plugins.toolkit as tk
 import json
 from ckan.config.routing import SubMapper
 import ckan.lib.jsonp as jsonp
+from ckanext.digitalassetfields import util
+
+ckan_version = util.version.parse(ckan__version__)
 
 class DigitalassetfieldsPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
     p.implements(p.IDatasetForm)
@@ -88,7 +92,12 @@ class DigitalassetfieldsPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
     def update_config(self, config):
         # Add this plugin's templates dir to CKAN's extra_template_paths, so
         # that CKAN will use this plugin's custom templates.
-        tk.add_template_directory(config, 'templates')
+
+        # first defined templates are higher priority
+        if ckan_version < util.version.parse("2.8.0"):
+            # override some parts with bootstrap2 templates if needed
+            tk.add_template_directory(config, 'templates-bs2')
+        # fallback to Bootstrap3 templates.
         tk.add_template_directory(config, 'templates')
         tk.add_public_directory(config, 'public')
         tk.add_resource('fanstatic', 'digitalassetfields')
