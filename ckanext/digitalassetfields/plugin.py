@@ -96,7 +96,7 @@ class DigitalassetfieldsPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
         # first defined templates are higher priority
         if ckan_version < util.version.parse("2.8.0"):
             # override some parts with bootstrap2 templates if needed
-            tk.add_template_directory(config, 'templates-bs2')
+            tk.add_template_directory(config, 'bs2-templates')
         # fallback to Bootstrap3 templates.
         tk.add_template_directory(config, 'templates')
         tk.add_public_directory(config, 'public')
