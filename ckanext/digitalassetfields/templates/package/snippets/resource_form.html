@@ -4,6 +4,7 @@
 
 {% block basic_fields %}
 {% resource 'digitalassetfields/digitalassetfields_restricted.js' %}
+{% resource 'digitalassetfields/digitalassetfields_filebox.js' %}
 
    {% block basic_fields_name %}
       {{ form.input('name', id='field-name', label=_('Label'), placeholder=_('eg. Bowen storage location for reference climate datasets'), value=data.name, error=errors.name, classes=['control-full']) }}
@@ -16,9 +17,39 @@
 
    {% block basic_fields_url %}
       {% set is_upload = (data.url_type == 'upload') %}
+     <div class="control-group" data-module="digitalassetfields_filebox">
+       <label class="control-label">Select resource location type:</label>
+       <div class="controls">
+         <div class="radio"><input type="radio" value="http" name="resource_location_type" style="top:0px;">Web Link (URL)</div>
+         <div class="radio"><input type="radio" value="file" name="resource_location_type" style="top:0px;">Network File Share</div>
+       </div>
+     </div>
+     <div id="filebox_loading_notification" class="control-group"><label class="control-label"></label><div class="controls"><p><em>Form is loading, please wait...</em></p></div></div>
+     <div id="filebox_select_notification" class="control-group hidden"><label class="control-label"></label><div class="controls"><p><em>Please choose one of the two options above.</em></p></div></div>
+
+     <div class="control-group control-full hidden" id="weblink_type_url_field">
+       <label class="control-label">Web Link (URL)</label>
+       <div class="controls">
+         <p><em>Use this resource location type if the resource is published on the internet, and is accessible via the web.</em></p>
+         <p><em>Enter the URL of the resource, beginning with &quot;http://&quot; or &quot;https://&quot;.</em></p>
+         <p id="filebox_weblink_string_error" class="hidden">A Web Link must start with http:// or https://</p>
+         <input id="webtype_url" type="text" placeholder="http://example.com/external-data.csv" name="webtype_url">
+       </div>
+     </div>
+     <div class="control-group control-full hidden" id="fileshare_type_url_field">
+       <label class="control-label">Network File Share Location</label>
+       <div class="controls">
+         <p><em>Use this resource location type if the resource is located on a network file share, such as a SMB/CIFS share, or a NFS share.</em></p>
+         <p><em>Enter the UNC Address of the resource, beginning with &quot;\\hostname\&quot; or &quot;file://&quot;.</em></p>
+         <p id="filebox_fileshare_string_error" class="hidden">A file share address must start with \\ or file://</p>
+         <input id="filetype_url" type="text" placeholder="file://server-cdc-7/shares/shared_data.csv" name="filetype_url">
+       </div>
+     </div>
+     <div class="hidden" id="real_url_fields_hidden">
       {{ form.image_upload(data, errors, field_url='url', field_upload='upload', field_clear='clear_upload',
             is_upload_enabled=False, is_url=data.url and not is_upload, is_upload=is_upload,
             upload_label=_('Data'), url_label=_('Web link (URL)'), placeholder=_('http://example.com/external-data.csv or file://<some file share>'), field_name='name') }}
+     </div>
    {% endblock %}
 
     {% block basic_fields_format %}
@@ -31,7 +62,7 @@
    {% block restricted %}
       {% set tag_attrs = {'data-module': 'digitalassetfields_restricted', 'data-module-restricted': ''} %}
 
-      {% if (data.restricted != None) %} 
+      {% if (data.restricted != None) %}
          {{ form.hidden('restricted', data.restricted) }}
       {% else %}
          {{ form.hidden('restricted', '{"level": "", "allowed_users":""}') }}
@@ -116,10 +147,10 @@
       <div class="modal-body finish-modal">
 	      <div id="emoji-finish-modal" class="finish-modal" >
 		      <img id="emoji-finish-img"
-		             src="/emoji-slightly-smiling.svg" 
-	                     data-src="/emoji-slightly-smiling.svg" 
-		             data-register="/emoji-smiling.svg" 
-		             data-cancel="/emoji-thinking.svg" 
+		             src="/emoji-slightly-smiling.svg"
+	                     data-src="/emoji-slightly-smiling.svg"
+		             data-register="/emoji-smiling.svg"
+		             data-cancel="/emoji-thinking.svg"
 			     width='150px'>
 	      </div>
 

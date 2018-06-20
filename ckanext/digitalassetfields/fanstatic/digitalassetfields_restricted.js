@@ -42,7 +42,7 @@ var digitalassetfields_restricted_check_radio = function(d) {
          var $radios = $('input:radio[name=optradio]');
 
          console.log(data.level);
- 
+
          $radios.filter('[value=' + data.level + ']').prop('checked', true);
 
 };
@@ -70,12 +70,12 @@ ckan.module('digitalassetfields_restricted', function ($) {
             digitalassetfields_restricted_check_radio(curr_restricted_data);
          });
 
-         
+
       }
 
 
-      
-      
+
+
 
       $('input[name=optradio]').on('click', function(e) {
         console.log(this);
@@ -117,7 +117,7 @@ ckan.module('digitalassetfields_restricted', function ($) {
          digitalassetfields_restricted_render_restricted(datastr);
 
 
-   
+
          return true;
       });
 
