@@ -33,7 +33,7 @@
          <p><em>Use this resource location type if the resource is published on the internet, and is accessible via the web.</em></p>
          <p><em>Enter the URL of the resource, beginning with &quot;http://&quot; or &quot;https://&quot;.</em></p>
          <p id="filebox_weblink_string_error" class="hidden">A Web Link must start with http:// or https://</p>
-         <input id="webtype_url" type="text" placeholder="http://example.com/external-data.csv" name="webtype_url">
+         <input id="webtype_url" type="text" value={{data.url}} placeholder="http://example.com/external-data.csv" name="webtype_url">
        </div>
      </div>
      <div class="control-group control-full hidden" id="fileshare_type_url_field">
@@ -42,7 +42,7 @@
          <p><em>Use this resource location type if the resource is located on a network file share, such as a SMB/CIFS share, or a NFS share.</em></p>
          <p><em>Enter the UNC Address of the resource, beginning with &quot;\\hostname\&quot; or &quot;file://&quot;.</em></p>
          <p id="filebox_fileshare_string_error" class="hidden">A file share address must start with \\ or file://</p>
-         <input id="filetype_url" type="text" placeholder="file://server-cdc-7/shares/shared_data.csv" name="filetype_url">
+         <input id="filetype_url" type="text" value={{data.url}} placeholder="file://server-cdc-7/shares/shared_data.csv" name="filetype_url">
        </div>
      </div>
      <div class="hidden" id="real_url_fields_hidden">
