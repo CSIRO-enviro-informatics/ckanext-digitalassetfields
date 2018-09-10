@@ -31,7 +31,7 @@ ckan.module('digitalassetfields_tooltips', function ($) {
       const helpIcon = $('<i class="fa fa-question-circle"></i>')
       const title = cgLabel.text();
       const content = "<p>" + cgLabel.text() + "</p>";
-      helpIcon.popover({title: title, html: true,
+      helpIcon.popover({title: title, html: true, container: 'body',
                        content: this._(this.options.tooltip), trigger: 'click', delay: {"hide": 500}, placement: 'left'});
 
       helpIcon.on('click', function(e) {
