@@ -51,10 +51,7 @@
     {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'Explanatory or content notes are used to add explanations, comments or other additional information relating to the main content but would make the text too long or awkward to read. Such notes may include supporting references. This could help users to understand the digital asset better. '}  %}
     {{ form.markdown('expl_notes', label=_('Explanatory Notes'), id='field-expl_notes', placeholder=_('Additional information about this asset, comments, explanations, or supporting references'), value=data.expl_notes, error=errors.expl_notes, classes=['control-full'], attrs=tag_attrs ) }}
   {% endblock %}
-  {% block package_spatial_things %}
-    {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'Spatial extents - expects geojson'}  %}
-    {{ form.textarea('spatial', label=_('Spatial'), id='field-spatial', placeholder=_(''), value=data.spatial, error=errors.spatial, classes=['control-full'], attrs=tag_attrs ) }}
-  {% endblock %}
+
   {% block package_verified %}
      {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'Field for users to verify that the details of the digital asset is as intended by the author or maintainer. <br/><br/>This is important in the case where automated processes are used to populate the entry. Manual entries are defaulted to true, whereas automatic imports are defaulted to false. <br/><br/>Select true to verify this digital asset.'}  %}
      {{ form.select('verified', label=_('Verified'), id='field-verified', options=[ {'value':'True', 'name':'True', 'text':'True'}, {'value':'False', 'name':'False', 'text':'False'} ], error=errors.verified, classes=['control-medium'], attrs = tag_attrs) }}
