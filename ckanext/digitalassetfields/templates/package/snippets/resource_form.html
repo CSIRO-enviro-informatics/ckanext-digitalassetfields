@@ -17,28 +17,34 @@
    
 
    {% block basic_fields_name %}
-      {{ form.input('name', id='field-name', label=_('Label'), placeholder=_('eg. Bowen storage location for reference climate datasets'), value=data.name, error=errors.name, classes=['control-full']) }}
+      {% resource 'digitalassetfields/digitalassetfields_tooltips.js' %}
+      {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'A text label for this resource. This will appear as the main header or title in the display view.'}  %}
+      {{ form.input('name', attrs=tag_attrs, id='field-name', label=_('Label'), placeholder=_('eg. Bowen storage location for reference climate datasets'), value=data.name, error=errors.name, classes=['control-full']) }}
    {% endblock %}
 
     {% block basic_fields_description %}
-      {{ form.markdown('description', id='field-description', label=_('Description'), placeholder=_('Description of the digital asset resource'), value=data.description, error=errors.description) }}
+      {% resource 'digitalassetfields/digitalassetfields_tooltips.js' %}
+      {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'A description or abstract for this resource.'}  %}
+      {% resource 'digitalassetfields/digitalassetfields_tooltips.js' %}
+      {{ form.markdown('description', attrs=tag_attrs, id='field-description', label=_('Description'), placeholder=_('Description of the digital asset resource'), value=data.description, error=errors.description) }}
     {% endblock %}
 
 
    {% block basic_fields_url %}
+      {% resource 'digitalassetfields/digitalassetfields_tooltips.js' %}
       {% set is_upload = (data.url_type == 'upload') %}
      <div class="control-group" data-module="digitalassetfields_filebox">
        <label class="control-label">Select resource location type:</label>
        <div class="controls">
          <div class="radio"><input type="radio" value="http" name="resource_location_type" style="top:0px;">Web Link (URL)</div>
-         <div class="radio"><input type="radio" value="file" name="resource_location_type" style="top:0px;">Network File Share</div>
+         <div class="radio"><input type="radio" value="file" name="resource_location_type" style="top:0px;">File Share</div>
        </div>
      </div>
      <div id="filebox_loading_notification" class="control-group"><label class="control-label"></label><div class="controls"><p><em>Form is loading, please wait...</em></p></div></div>
      <div id="filebox_select_notification" class="control-group hidden"><label class="control-label"></label><div class="controls"><p><em>Please choose one of the two options above.</em></p></div></div>
 
      <div class="control-group control-full hidden" id="weblink_type_url_field">
-       <label class="control-label">Web Link (URL)</label>
+       <label class="control-label">Web Link (URL) </label>
        <div class="controls">
          <p><em>Use this resource location type if the resource is published on the internet, and is accessible via the web.</em></p>
          <p><em>Enter the URL of the resource, beginning with &quot;http://&quot; or &quot;https://&quot;.</em></p>
@@ -47,7 +53,7 @@
        </div>
      </div>
      <div class="control-group control-full hidden" id="fileshare_type_url_field">
-       <label class="control-label">Network File Share Location</label>
+       <label class="control-label">File Share Location</label>
        <div class="controls">
          <p><em>Use this resource location type if the resource is located on a network file share, such as a SMB/CIFS share, or a NFS share.</em></p>
          <p><em>Enter the UNC Address of the resource, beginning with &quot;\\hostname\&quot; or &quot;file://&quot;.</em></p>
@@ -63,7 +69,8 @@
    {% endblock %}
 
     {% block basic_fields_format %}
-      {% set format_attrs = {'data-module': 'autocomplete', 'data-module-source': '/api/2/util/resource/format_autocomplete?incomplete=?'} %}
+      {% resource 'digitalassetfields/digitalassetfields_tooltips.js' %}
+      {% set format_attrs = {'data-module': 'autocomplete digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'The format type for this resource. If left empty, the system will try to guess the most appropriate format.', 'data-module-source': '/api/2/util/resource/format_autocomplete?incomplete=?'} %}
       {% call form.input('format', id='field-format', label=_('Format'), placeholder=_('eg. CSV, ZIP, JSON, WMS, File Share or Git repo'), value=data.format, error=errors.format, classes=['control-full'], attrs=format_attrs) %}
       {% endcall %}
     {% endblock %}
@@ -79,7 +86,10 @@
       {% endif %}
 
  <div class="control-group">
-    <label class="control-label">{{ _("Access ") }}</label>
+    <label class="control-label">{{ _("Access ") }}
+       <i class="fa fa-question-circle" data-module="digitalassetfields_manual_tooltip" title="Access" data-module-tooltip="You may set restrictions on access to details of the information about this resource by clicking on the 'Set resource permissions' button. 4 levels of restrictions apply - General access, Registered users (users who can login), Same organizational unit (users who belong to the same organisational unit selected for this asset entry), and Specified users (you may specify and restrict access to this record view to a set of registered users)" data-original-title="" title=""></i>
+
+    </label>
     <div class="controls">
 
       <div>
