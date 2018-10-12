@@ -36,8 +36,8 @@
      <div class="control-group" data-module="digitalassetfields_filebox">
        <label class="control-label">Select resource location type:</label>
        <div class="controls">
-         <div class="radio"><input type="radio" value="http" name="resource_location_type" style="top:0px;">Web Link (URL)</div>
-         <div class="radio"><input type="radio" value="file" name="resource_location_type" style="top:0px;">File Share</div>
+         <div class="radio"><input type="radio" value="http" {% if data.resource_location_type == "http" %} checked="checked" {% endif %} name="resource_location_type" style="top:0px;">Web Link (URL)</div>
+         <div class="radio"><input type="radio" value="file" {% if data.resource_location_type == "file"%} checked="checked" {% endif %} name="resource_location_type" style="top:0px;">File path</div>
        </div>
      </div>
      <div id="filebox_loading_notification" class="control-group"><label class="control-label"></label><div class="controls"><p><em>Form is loading, please wait...</em></p></div></div>
@@ -53,7 +53,7 @@
        </div>
      </div>
      <div class="control-group control-full hidden" id="fileshare_type_url_field">
-       <label class="control-label">File Share Location</label>
+       <label class="control-label">File Path </label>
        <div class="controls">
          <p><em>Use this resource location type if the resource is located on a network file share, such as a SMB/CIFS share, or a NFS share.</em></p>
          <p><em>Enter the UNC Address of the resource, beginning with &quot;\\hostname\&quot; or &quot;file://&quot;.</em></p>
