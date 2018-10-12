@@ -6,6 +6,16 @@
 {% resource 'digitalassetfields/digitalassetfields_restricted.js' %}
 {% resource 'digitalassetfields/digitalassetfields_filebox.js' %}
 
+   {% block basic_fields_intent %}
+      <div>
+          <p>
+              This section allows you to add links to file locations - either as web links to CSIRO internal or external resources, or file locations on local or network drives.
+              You may add one or more resources that is associated with this digital asset. The only mandatory field is the Label but links to the file locations help.
+          </p>
+      </div>
+   {% endblock %}
+   
+
    {% block basic_fields_name %}
       {{ form.input('name', id='field-name', label=_('Label'), placeholder=_('eg. Bowen storage location for reference climate datasets'), value=data.name, error=errors.name, classes=['control-full']) }}
    {% endblock %}

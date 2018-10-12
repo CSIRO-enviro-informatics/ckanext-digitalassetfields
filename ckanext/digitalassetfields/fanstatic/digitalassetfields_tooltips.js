@@ -1,6 +1,28 @@
 "use strict";
 
 
+ckan.module('digitalassetfields_manual_tooltip', function ($) {
+  return {
+    initialize: function () {
+      console.log('in digitalassetfields_manual_tooltip');
+      console.log(this);
+      console.log(this.options);
+      console.log(this.el);
+      var helpIcon = $(this.el);
+      helpIcon.popover({title: '', html: true, container: 'body',
+                       content: this._(this.options.tooltip), trigger: 'click', delay: {"hide": 500}, placement: 'left'});
+      $('body').on('click', function (e) {
+         $('[data-toggle=popover]').each(function () {
+           // hide any open popovers when the anywhere else in the body is clicked
+           if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+              $(this).popover('hide');
+           }
+       });
+     });
+    }
+  };
+});
+
 ckan.module('digitalassetfields_tooltips', function ($) {
   return {
     initialize: function () {
@@ -58,11 +80,10 @@ ckan.module('digitalassetfields_tooltips', function ($) {
            // hide any open popovers when the anywhere else in the body is clicked
            if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
               $(this).popover('hide');
-
-
            }
        });
      });
+
     }
   };
 });
