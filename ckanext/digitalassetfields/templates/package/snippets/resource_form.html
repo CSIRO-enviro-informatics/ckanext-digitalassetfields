@@ -18,7 +18,7 @@
 
    {% block basic_fields_name %}
       {% resource 'digitalassetfields/digitalassetfields_tooltips.js' %}
-      {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'A text label for this resource. This will appear as the main header or title in the display view.'}  %}
+      {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'A text label for this resource. This will appear as the main header or title in the display view. This field is mandatory.'}  %}
       {{ form.input('name', attrs=tag_attrs, id='field-name', label=_('Label'), placeholder=_('eg. Bowen storage location for reference climate datasets'), value=data.name, error=errors.name, classes=['control-full']) }}
    {% endblock %}
 
