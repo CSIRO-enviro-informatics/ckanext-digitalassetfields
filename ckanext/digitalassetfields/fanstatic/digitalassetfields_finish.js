@@ -46,12 +46,16 @@ ckan.module('digitalassetfields_finish', function ($) {
          var dataset_name = path_parts.pop() || path_parts.pop();
 	       target_group_url = target_group_url + "dataset/groups/" + dataset_name;
 	       console.log("target group url " + target_group_url);
-	       $.post(target_group_url, { group_added: "2e662e20-0c88-492d-8deb-7cac39ae6a14" },
+        var target = document.getElementById('_digitalassetfields_pre-update');
+        var spinner = new Spinner().spin(target);
+	       $.post(target_group_url, { group_added: "6d9337de-8140-4911-9a3f-8c02cdc166fa" },
           function(returnedData){
             console.log("registered with local group");
             console.log(returnedData);
+           spinner.stop()
           }).fail(function(){
           console.log("error adding dataset to group");
+           spinner.stop()
         });
          $('form#resource-edit').submit();
       });
