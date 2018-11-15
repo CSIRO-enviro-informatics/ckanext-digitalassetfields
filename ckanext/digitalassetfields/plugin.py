@@ -4,16 +4,32 @@ from ckan import __version__ as ckan__version__
 import ckan.plugins as p
 import ckan.plugins.toolkit as tk
 import json
+import ckan.authz as authz
 from ckan.config.routing import SubMapper
 import ckan.lib.jsonp as jsonp
 from ckanext.digitalassetfields import util
 
 ckan_version = util.version.parse(ckan__version__)
 
-@ckan.plugins.toolkit.chained_auth_function
-def member_create(next_auth, context, data_dict):
-    group = tk.get_action('group_list')(data_dict=data_dict)[0]
-    if group == u'local':
+def member_create(context, data_dict):
+    group = tk.get_action('group_show')(data_dict=data_dict)
+    if group['name'] == u'local':
+        return {'success': True}
+    user = context['user']
+
+    # User must be able to update the group to add a member to it
+    permission = 'update'
+    # However if the user is member of group then they can add/remove datasets
+    if not group['is_organization'] and data_dict.get('object_type') == 'package':
+        permission = 'manage_group'
+
+    authorized = authz.has_user_permission_for_group_or_org(group['id'],
+                                                            user,
+                                                            permission)
+    if not authorized:
+        return {'success': False,
+                'msg': 'User %s not authorized to edit group %s' % (str(user), group['id'])}
+    else:
         return {'success': True}
 
 class DigitalassetfieldsPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
