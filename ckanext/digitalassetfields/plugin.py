@@ -10,9 +10,16 @@ from ckanext.digitalassetfields import util
 
 ckan_version = util.version.parse(ckan__version__)
 
+@ckan.plugins.toolkit.chained_auth_function
+def member_create(next_auth, context, data_dict):
+    group = tk.get_action('group_list')(data_dict=data_dict)[0]
+    if group == u'local':
+        return {'success': True}
+
 class DigitalassetfieldsPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
     p.implements(p.IDatasetForm)
     p.implements(p.IConfigurer)
+    p.implements(p.IAuthFunctions)
 
     def _modify_package_schema(self, schema):
         schema.update({
@@ -103,3 +110,5 @@ class DigitalassetfieldsPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
         tk.add_resource('fanstatic', 'digitalassetfields')
         tk.add_resource('resources', 'resources')
 
+    def get_auth_functions(self):
+        return {'member_create': member_create}
