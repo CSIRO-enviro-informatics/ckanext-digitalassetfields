@@ -11,8 +11,14 @@ from ckanext.digitalassetfields import util
 
 ckan_version = util.version.parse(ckan__version__)
 
+@tk.auth_allow_anonymous_access
 def member_create(context, data_dict):
-    group = tk.get_action('group_show')(data_dict=data_dict)
+    try:
+        group = tk.get_action('group_show')(data_dict=data_dict)
+    except toolkit.ObjectNotFound:
+        return {'success': False,
+                'msg': 'Couldn''t find group'}
+
     if group['name'] == u'local':
         return {'success': True}
     user = context['user']
