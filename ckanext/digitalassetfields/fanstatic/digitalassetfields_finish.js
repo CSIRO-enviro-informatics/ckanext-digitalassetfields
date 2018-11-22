@@ -13,7 +13,7 @@ ckan.module('digitalassetfields_finish', function ($) {
       console.log("this.options");
       console.log(this.options);
 
-window.addEventListener('keydown',function(e){if(e.keyIdentifier=='U+000A'||e.keyIdentifier=='Enter'||e.keyCode==13){if(e.target.nodeName=='INPUT'&&e.target.type=='text'){e.preventDefault();return false;}}},true);
+      window.addEventListener('keydown',function(e){if(e.keyIdentifier=='U+000A'||e.keyIdentifier=='Enter'||e.keyCode==13){if(e.target.nodeName=='INPUT'&&e.target.type=='text'){e.preventDefault();return false;}}},true);
 
       if($('#_digitalassetfields_pre-update').length > 0) {
 	 const data = {state: 'submitted', id: ''}
