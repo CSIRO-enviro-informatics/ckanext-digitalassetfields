@@ -13,6 +13,7 @@ ckan_version = util.version.parse(ckan__version__)
 class DigitalassetfieldsPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
     p.implements(p.IDatasetForm)
     p.implements(p.IConfigurer)
+    p.implements(p.IFacets)
 
     def _modify_package_schema(self, schema):
         schema.update({
@@ -41,6 +42,10 @@ class DigitalassetfieldsPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
         })
         return schema
 
+    def dataset_facets(self, facets_dict, package_type):
+        facets_dict['asset_type'] = tk._('Asset Type')
+        return facets_dict
+    
     def create_package_schema(self):
         schema = super(DigitalassetfieldsPlugin, self).create_package_schema()
         schema = self._modify_package_schema(schema)
