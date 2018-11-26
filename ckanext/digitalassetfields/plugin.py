@@ -75,6 +75,14 @@ class DigitalassetfieldsPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
         facets_dict['asset_type'] = tk._('Asset Type')
         return facets_dict
     
+    def group_facets(self, facets_dict, group_type, package_type):
+        facets_dict['asset_type'] = tk._('Asset Type')
+        return facets_dict
+
+    def organization_facets(self, facets_dict, organization_type, package_type):
+        facets_dict['asset_type'] = tk._('Asset Type')
+        return facets_dict
+    
     def create_package_schema(self):
         schema = super(DigitalassetfieldsPlugin, self).create_package_schema()
         schema = self._modify_package_schema(schema)
