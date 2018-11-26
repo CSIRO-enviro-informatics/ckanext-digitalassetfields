@@ -4,15 +4,44 @@ from ckan import __version__ as ckan__version__
 import ckan.plugins as p
 import ckan.plugins.toolkit as tk
 import json
+import ckan.authz as authz
 from ckan.config.routing import SubMapper
 import ckan.lib.jsonp as jsonp
 from ckanext.digitalassetfields import util
 
 ckan_version = util.version.parse(ckan__version__)
 
+@tk.auth_allow_anonymous_access
+def member_create(context, data_dict):
+    try:
+        group = tk.get_action('group_show')(data_dict=data_dict)
+    except toolkit.ObjectNotFound:
+        return {'success': False,
+                'msg': 'Couldn''t find group'}
+
+    if group['name'] == u'local':
+        return {'success': True}
+    user = context['user']
+
+    # User must be able to update the group to add a member to it
+    permission = 'update'
+    # However if the user is member of group then they can add/remove datasets
+    if not group['is_organization'] and data_dict.get('object_type') == 'package':
+        permission = 'manage_group'
+
+    authorized = authz.has_user_permission_for_group_or_org(group['id'],
+                                                            user,
+                                                            permission)
+    if not authorized:
+        return {'success': False,
+                'msg': 'User %s not authorized to edit group %s' % (str(user), group['id'])}
+    else:
+        return {'success': True}
+
 class DigitalassetfieldsPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
     p.implements(p.IDatasetForm)
     p.implements(p.IConfigurer)
+    p.implements(p.IAuthFunctions)
     p.implements(p.IFacets)
 
     def _modify_package_schema(self, schema):
@@ -108,3 +137,5 @@ class DigitalassetfieldsPlugin(p.SingletonPlugin, tk.DefaultDatasetForm):
         tk.add_resource('fanstatic', 'digitalassetfields')
         tk.add_resource('resources', 'resources')
 
+    def get_auth_functions(self):
+        return {'member_create': member_create}
