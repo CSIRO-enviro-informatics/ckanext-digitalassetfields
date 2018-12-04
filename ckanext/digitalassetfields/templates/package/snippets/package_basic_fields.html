@@ -103,7 +103,7 @@
   <div class="inline-box">
   {% block package_asset_type %}
      {% set tag_attrs = {'data-module': 'digitalassetfields_tooltips', 'data-module-add_help_icon': 'true', 'data-module-tooltip': 'Asset type refers to a digital asset. e.g. Data collection or Software. See <a href="http://registry.it.csiro.au/def/damc/asset-types" target="out">here for a full list of asset types</a>. If it is not listed, you may put a request via the Send comment link on that site.'}  %}
-     {{ form.select('asset_type', label=_('Asset type'), id='field-asset_type', options=[{'value':'dataset', 'name':'Data collection', 'text':'Data collection'}, {'value':'software', 'text':'Software'},{'value':'service', 'text':'Web Service'},   {'value':'website', 'text':'Web site'}, {'value':'other', 'text':'Other'}], error=errors.asset_type, classes=['control-small'], attrs = tag_attrs) }}
+     {{ form.select('asset_type', label=_('Asset type'), id='field-asset_type', options=[{'value':'dataset', 'name':'Data collection', 'text':'Data collection'}, {'value':'software', 'text':'Software'},{'value':'service', 'text':'Web Service'},   {'value':'database', 'text':'Database'}, {'value':'model', 'text':'Model'}, {'value':'website', 'text':'Web site'}, {'value':'other', 'text':'Other'}], error=errors.asset_type, classes=['control-small'], attrs = tag_attrs) }}
   {% endblock %}
   </div>
   <div class="inline-box">
